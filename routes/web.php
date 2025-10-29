@@ -1,9 +1,13 @@
 <?php
 
+
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::resource('/home',HomeController::class);
+// Route::get('/',[HomeController::class,'testroot'])->name('root');
+
+Route::resource('/post',HomeController::class)->middleware(['auth']);
+
 
 
 
@@ -57,3 +61,13 @@ Route::resource('/home',HomeController::class);
 //     return view('contact', compact('data'));
 // });
 
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});

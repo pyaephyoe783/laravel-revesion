@@ -17,12 +17,21 @@ class PostSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i=0; $i<2; $i++){
+
             DB::table('posts')->insert([
-            'name' => Str::random(10),
-            'description' => Str::random(100),
-            'created_at' => date('Y-m-d H:i:s'),
+            [
+                'name' => 'First Post',
+                'description' => 'This is the body of the first post.',
+                'category_id' => 1
+
+            ],
+            [
+                'name' => 'Second Post',
+                'description' => 'This is the second post content.',
+                'category_id' => 2
+
+            ],
         ]);
-        }
+
     }
 }
